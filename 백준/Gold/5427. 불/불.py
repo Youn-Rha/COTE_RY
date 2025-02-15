@@ -20,7 +20,7 @@ def bfs_escape(x, y, dist):
     if 0 <= x < h and 0 <= y < w and building[x][y] == ".":
         building[x][y] = "@"
         deque_escape.append((x, y, dist + 1))
-    elif x == -1 or y == -1 or x == h or y == w:
+    elif x == -1 or y == -1 or x == h or y == w:    # 종료 조건
         flag = True
 
 # main
@@ -43,30 +43,22 @@ if __name__ == "__main__":
                     fire[i][j] = -1
                 if s[j] == "@":
                     deque_escape.append((i, j, dist_escape))
-        while deque_fire:
+        while deque_fire:                           # 불 먼저 이동
             x, y, dist_fire = deque_fire.popleft()
             bfs_fire(x + 1, y, dist_fire)
             bfs_fire(x - 1, y, dist_fire)
             bfs_fire(x, y + 1, dist_fire)
             bfs_fire(x, y - 1, dist_fire)
-        while deque_escape:
+        while deque_escape:                         # 사람 탈출 이동
             x, y, dist_escape = deque_escape.popleft()
             bfs_escape(x + 1, y, dist_escape)
             bfs_escape(x - 1, y, dist_escape)
             bfs_escape(x, y + 1, dist_escape)
             bfs_escape(x, y - 1, dist_escape)
-            if flag and fire[x][y] > dist_escape:
+            if flag and fire[x][y] > dist_escape:   # 종료 조건
                 break
             else:
                 flag = False
-        if x == -1:
-            x += 1
-        elif x == h:
-            x = h - 1
-        elif y == -1:
-            y += 1
-        elif y == w:
-            y = w - 1
         if flag:
             print(dist_escape + 1)
         else:
