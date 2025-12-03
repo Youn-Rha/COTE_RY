@@ -16,8 +16,6 @@ if __name__ == "__main__":
                 break
             max_n = "".join(sorted(n, reverse=True))
             min_n = max_n[::-1]
-            n = str(int(max_n) - int(min_n))
-            if len(n) < 4:
-                n += '0' * (4 - len(n))
+            n = str(int(max_n) - int(min_n)).zfill(4)
             cnt += 1
         print(cnt)
