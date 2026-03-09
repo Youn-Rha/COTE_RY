@@ -8,25 +8,18 @@ def input():
 # main
 if __name__ == "__main__":
     def check():
-        bingo = 0
+        bingo, tmp1, tmp2 = 0, 0, 0
+        reverse_board = list(zip(*board))
         for i in range(5):
             if sum(board[i]) == 5:
                 bingo += 1
-        for j in range(5):
-            tmp = 0
-            for i in range(5):
-                tmp += board[i][j]
-            if tmp == 5:
+            if sum(reverse_board[i]) == 5:
                 bingo += 1
-        tmp = 0
-        for i in range(5):
-            tmp += board[i][i]
-        if tmp == 5:
+            tmp1 += board[i][i]
+            tmp2 += board[i][4 - i]
+        if tmp1 == 5:
             bingo += 1
-        tmp = 0
-        for i in range(5):
-            tmp += board[i][4 - i]
-        if tmp == 5:
+        if tmp2 == 5:
             bingo += 1
 
         if bingo >= 3:
